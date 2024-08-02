@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Avatar } from '@/components/avatar';
+import { Avatar } from "@/components/avatar";
 import {
   Dropdown,
   DropdownButton,
@@ -8,8 +8,8 @@ import {
   DropdownItem,
   DropdownLabel,
   DropdownMenu,
-} from '@/components/dropdown';
-import LoginBtn from '@/components/LoginBtn';
+} from "@/components/dropdown";
+import LoginBtn from "@/components/LoginBtn";
 import {
   Sidebar,
   SidebarBody,
@@ -20,9 +20,9 @@ import {
   SidebarLabel,
   SidebarSection,
   SidebarSpacer,
-} from '@/components/sidebar';
-import { SidebarLayout } from '@/components/sidebar-layout';
-import { ArrowRightStartOnRectangleIcon, ChevronUpIcon, UserCircleIcon } from '@heroicons/react/16/solid';
+} from "@/components/sidebar";
+import { SidebarLayout } from "@/components/sidebar-layout";
+import { ArrowRightStartOnRectangleIcon, ChevronUpIcon, UserCircleIcon } from "@heroicons/react/16/solid";
 import {
   Cog6ToothIcon,
   HomeIcon,
@@ -30,12 +30,13 @@ import {
   SparklesIcon,
   Square2StackIcon,
   TicketIcon,
-} from '@heroicons/react/20/solid';
-import { signOut, useSession } from 'next-auth/react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+} from "@heroicons/react/20/solid";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { SessionData } from "./types/types";
 
-function AccountDropdownMenu({ anchor }: { anchor: 'top start' | 'bottom end' }) {
+function AccountDropdownMenu({ anchor }: { anchor: "top start" | "bottom end" }) {
   return (
     <DropdownMenu className="min-w-64" anchor={anchor}>
       <DropdownItem href="#">
@@ -51,9 +52,8 @@ function AccountDropdownMenu({ anchor }: { anchor: 'top start' | 'bottom end' })
   );
 }
 
-export function ApplicationLayout({ children }: { children: React.ReactNode }) {
+export function ApplicationLayout({ sessionData, children }: { sessionData: SessionData; children: React.ReactNode }) {
   const pathname = usePathname();
-  const { data: session, status } = useSession();
 
   return (
     <SidebarLayout
@@ -69,19 +69,19 @@ export function ApplicationLayout({ children }: { children: React.ReactNode }) {
 
           <SidebarBody>
             <SidebarSection>
-              <SidebarItem href="/" current={pathname === '/'}>
+              <SidebarItem href="/" current={pathname === "/"}>
                 <HomeIcon />
                 <SidebarLabel>Home</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/events" current={pathname.startsWith('/events')}>
+              <SidebarItem href="/teams" current={pathname.startsWith("/teams")}>
                 <Square2StackIcon />
-                <SidebarLabel>Events</SidebarLabel>
+                <SidebarLabel>Teams</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/orders" current={pathname.startsWith('/orders')}>
+              <SidebarItem href="/orders" current={pathname.startsWith("/orders")}>
                 <TicketIcon />
                 <SidebarLabel>Orders</SidebarLabel>
               </SidebarItem>
-              <SidebarItem href="/settings" current={pathname.startsWith('/settings')}>
+              <SidebarItem href="/settings" current={pathname.startsWith("/settings")}>
                 <Cog6ToothIcon />
                 <SidebarLabel>Settings</SidebarLabel>
               </SidebarItem>
@@ -105,18 +105,18 @@ export function ApplicationLayout({ children }: { children: React.ReactNode }) {
             </SidebarSection>
           </SidebarBody>
 
-          {status === 'authenticated' && session ? (
+          {sessionData.email && sessionData.image && sessionData.userName ? (
             <SidebarFooter className="max-lg:hidden">
               <Dropdown>
                 <DropdownButton as={SidebarItem}>
                   <span className="flex min-w-0 items-center gap-3">
-                    <Avatar src={session.user?.image || ''} className="size-10" square alt="" />
+                    <Avatar src={sessionData?.image || ""} className="size-10" square alt="" />
                     <span className="min-w-0">
                       <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">
-                        {session.user?.name || ''}
+                        {sessionData?.userName || ""}
                       </span>
                       <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
-                        {session.user?.email || ''}
+                        {sessionData?.email || ""}
                       </span>
                     </span>
                   </span>
