@@ -1,3 +1,4 @@
+import AuthContext from '@/context/AuthContext';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { ApplicationLayout } from './application-layout';
@@ -37,7 +38,9 @@ export default function RootLayout({
   return (
     <html lang="ko" className={PretendardFont.className}>
       <body>
-        <ApplicationLayout>{children}</ApplicationLayout>
+        <AuthContext>
+          <ApplicationLayout>{children}</ApplicationLayout>
+        </AuthContext>
       </body>
     </html>
   );
