@@ -62,7 +62,7 @@ export function ApplicationLayout({ sessionData, children }: { sessionData: Sess
           <SidebarHeader>
             <SidebarSection>
               <Link href="/">
-                <img src="img/cocircuit_title.PNG" className="w-70" />
+                <img src="images/cocircuit_title.PNG" className="w-70" />
               </Link>
             </SidebarSection>
           </SidebarHeader>
@@ -85,10 +85,6 @@ export function ApplicationLayout({ sessionData, children }: { sessionData: Sess
                 <Cog6ToothIcon />
                 <SidebarLabel>Settings</SidebarLabel>
               </SidebarItem>
-            </SidebarSection>
-
-            <SidebarSection className="max-lg:hidden">
-              <SidebarHeading>Upcoming Events</SidebarHeading>
             </SidebarSection>
 
             <SidebarSpacer />

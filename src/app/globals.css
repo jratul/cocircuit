@@ -5,3 +5,7 @@
 body {
   letter-spacing: -1.5px;
 }
+
+.ag-theme-quartz .ag-row-hover {
+  background: rgba(139, 59, 214, 0.1);
+}

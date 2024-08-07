@@ -80,7 +80,7 @@ export default function RecentCommentTable() {
   };
 
   return (
-    <>
+    <div className="mt-5">
       <p className="mb-3 text-2xl font-bold">
         Recent <span className="text-violet-500">Comments</span>
       </p>
@@ -92,6 +92,6 @@ export default function RecentCommentTable() {
           getRowStyle={getRowStyle}
         />
       </div>
-    </>
+    </div>
   );
 }
